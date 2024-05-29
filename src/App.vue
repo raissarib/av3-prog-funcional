@@ -1,26 +1,65 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <nav class="navbar">
+      <button @click="showTransactions" class="nav-button">Transações</button>
+      <button @click="showBlockchain" class="nav-button">Blockchain</button>
+    </nav>
+    <div v-if="currentRoute === 'transactions'">
+      <TransactionsItens />
+    </div>
+    <div v-else-if="currentRoute === 'blockchain'">
+      <BlockchainItens />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TransactionsItens from "./components/TransactionsItens.vue";
+import BlockchainItens from "./components/BlockchainItens.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TransactionsItens,
+    BlockchainItens,
+  },
+  data() {
+    return {
+      currentRoute: "transactions",
+    };
+  },
+  methods: {
+    showTransactions() {
+      this.currentRoute = "transactions";
+    },
+    showBlockchain() {
+      this.currentRoute = "blockchain";
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.nav-button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-button:focus {
+  outline: none;
+}
+
+.navbar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.navbar-narrow {
+  width: 50%;
 }
 </style>
